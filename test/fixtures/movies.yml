@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vote_count: 1
+  tmdb_id: 1
+  video: false
+  vote_average: 1
+  title: MyString
+  popularity: 1
+  poster_path: MyString
+  original_language: 1
+  original_title: 1
+  genre_ids: 
+  backdrop_path: 1
+  adult: false
+  overview: MyText
+  release_date: MyString
+
+two:
+  vote_count: 1
+  tmdb_id: 1
+  video: false
+  vote_average: 1
+  title: MyString
+  popularity: 1
+  poster_path: MyString
+  original_language: 1
+  original_title: 1
+  genre_ids: 
+  backdrop_path: 1
+  adult: false
+  overview: MyText
+  release_date: MyString
