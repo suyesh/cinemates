@@ -1,33 +1,53 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  vote_count: 1
-  tmdb_id: 1
-  video: false
-  vote_average: 1
-  title: MyString
-  popularity: 1
-  poster_path: MyString
-  original_language: 1
-  original_title: 1
-  genre_ids: 
-  backdrop_path: 1
   adult: false
+  backdrop_path: MyString
+  budget: 1
+  homepage: MyString
+  tmdb_id: 1
+  imdb_id: MyString
+  original_language: MyString
+  original_title: MyString
   overview: MyText
+  popularity: 9.99
+  poster_path: MyString
   release_date: MyString
+  revenue: 1
+  runtime: 1
+  status: MyString
+  tagline: MyString
+  title: MyString
+  video: false
+  vote_average: 9.99
+  vote_count: 1
+  genres: MyString
+  production_companies: MyString
+  production_countries: MyString
+  spoken_languages: MyString
 
 two:
-  vote_count: 1
-  tmdb_id: 1
-  video: false
-  vote_average: 1
-  title: MyString
-  popularity: 1
-  poster_path: MyString
-  original_language: 1
-  original_title: 1
-  genre_ids: 
-  backdrop_path: 1
   adult: false
+  backdrop_path: MyString
+  budget: 1
+  homepage: MyString
+  tmdb_id: 1
+  imdb_id: MyString
+  original_language: MyString
+  original_title: MyString
   overview: MyText
+  popularity: 9.99
+  poster_path: MyString
   release_date: MyString
+  revenue: 1
+  runtime: 1
+  status: MyString
+  tagline: MyString
+  title: MyString
+  video: false
+  vote_average: 9.99
+  vote_count: 1
+  genres: MyString
+  production_companies: MyString
+  production_countries: MyString
+  spoken_languages: MyString
