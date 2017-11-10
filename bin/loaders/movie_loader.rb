@@ -1,9 +1,21 @@
 require File.dirname(__FILE__) + '/../../config/environment.rb'
+require 'date'
+require 'zlib'
+require 'open-uri'
 
-File.read('movie_ids_11_08_2017.json').each_line do |movie|
+MOVIE_BASE_URL = "http://files.tmdb.org/p/exports/movie_ids_#{Date.today.strftime("%m_%d_%Y")}.json.gz"
+SOURCE = open(MOVIE_BASE_URL)
+MOVIES = Zlib::GzipReader.new(SOURCE)
+
+EXISTING_MOVIES = Movie.tmdb_ids
+
+MOVIES.read.each_line do |movie|
   movie_id = JSON.parse(movie)["id"]
-  next if Movie.tmdb_ids.include?(movie_id)
-  sleep (0.5)
+  if EXISTING_MOVIES.include?(movie_id)
+    puts "Movie  with id #{movie_id} already in database."
+    next
+  end
+  sleep 0.5
   movie = Tmdb::Movie.detail(movie_id)
   genres = movie.genres.map {|genre| genre.name}
   production_companies = movie.production_companies.map {|company| company.name}
@@ -33,7 +45,6 @@ File.read('movie_ids_11_08_2017.json').each_line do |movie|
                 production_companies: production_companies,
                 production_countries: production_countries,
                 spoken_languages: spoken_languages
-
               )
     puts "Added #{movie.title}"
 end
