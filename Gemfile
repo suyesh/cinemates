@@ -12,7 +12,6 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'themoviedb-api'
 gem 'knock'
-gem 'graphql'
 gem 'bcrypt', '~> 3.1.7'
 # gem 'rack-cors'
 
