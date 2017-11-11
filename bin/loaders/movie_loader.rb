@@ -3,24 +3,25 @@ require 'date'
 require 'zlib'
 require 'open-uri'
 
-MOVIE_BASE_URL = "http://files.tmdb.org/p/exports/movie_ids_#{Date.today.strftime("%m_%d_%Y")}.json.gz"
-SOURCE = open(MOVIE_BASE_URL)
-MOVIES = Zlib::GzipReader.new(SOURCE)
-
 EXISTING_MOVIES = Movie.tmdb_ids
+DATE_TODAY = Date.today.strftime("%m_%d_%Y") #11_11_2017
 
-MOVIES.read.each_line do |movie|
-  movie_id = JSON.parse(movie)["id"]
+MOVIES = Zlib::GzipReader.new(
+  open("http://files.tmdb.org/p/exports/movie_ids_#{DATE_TODAY}.json.gz")
+).read
+
+MOVIES.each_line do |movie|
+  movie_id = JSON.parse(movie)['id']
   if EXISTING_MOVIES.include?(movie_id)
     puts "Movie  with id #{movie_id} already in database."
     next
   end
-  sleep 0.5
+  sleep 0.2
   movie = Tmdb::Movie.detail(movie_id)
-  genres = movie.genres.map {|genre| genre.name}
-  production_companies = movie.production_companies.map {|company| company.name}
-  production_countries = movie.production_countries.map {|country| country.name}
-  spoken_languages = movie.spoken_languages.map {|language| language.name}
+  genres = movie.genres.map(&:name)
+  production_companies = movie.production_companies.map(&:name)
+  production_countries = movie.production_countries.map(&:name)
+  spoken_languages = movie.spoken_languages.map(&:name)
   Movie.create!(adult: movie.adult,
                 backdrop_path: movie.backdrop_path,
                 budget: movie.budget,
@@ -46,5 +47,5 @@ MOVIES.read.each_line do |movie|
                 production_countries: production_countries,
                 spoken_languages: spoken_languages
               )
-    puts "Added #{movie.title}"
+  puts "Added #{movie.title} #{movie.id}"
 end
