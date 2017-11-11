@@ -3,12 +3,17 @@ require 'date'
 require 'zlib'
 require 'open-uri'
 
+puts "Retrieving Existing movie ids from the database."
 EXISTING_MOVIES = Movie.tmdb_ids
+puts "#{EXISTING_MOVIES.length} existing movie ids retrieved."
+
 DATE_TODAY = Date.today.strftime("%m_%d_%Y") #11_11_2017
 
+puts "Downloading and Reading latest Movie list for #{DATE_TODAY}"
 MOVIES = Zlib::GzipReader.new(
   open("http://files.tmdb.org/p/exports/movie_ids_#{DATE_TODAY}.json.gz")
 ).read
+
 
 MOVIES.each_line do |movie|
   movie_id = JSON.parse(movie)['id']

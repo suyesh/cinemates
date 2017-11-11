@@ -1,0 +1,2 @@
+class OtherGender < User
+end

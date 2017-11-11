@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171111090609) do
+ActiveRecord::Schema.define(version: 20171111185433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20171111090609) do
     t.text "spoken_languages", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["adult"], name: "index_movies_on_adult"
     t.index ["imdb_id"], name: "index_movies_on_imdb_id"
     t.index ["original_language"], name: "index_movies_on_original_language"
     t.index ["original_title"], name: "index_movies_on_original_title"
@@ -65,6 +66,11 @@ ActiveRecord::Schema.define(version: 20171111090609) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
+    t.text "gender", default: [], array: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
+    t.index ["zip_code"], name: "index_users_on_zip_code"
   end
 
 end
