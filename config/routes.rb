@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  post "/graphql", to: "graphql#execute"
-
-  devise_for :users
+  post 'user_token' => 'user_token#create'
+  post "/api", to: "graphql#execute"
 end
