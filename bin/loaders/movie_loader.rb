@@ -5,7 +5,7 @@ require 'open-uri'
 require 'colorize'
 
 puts "Retrieving Existing movie ids from the database.".colorize(:blue)
-EXISTING_MOVIES = Movie.tmdb_ids
+EXISTING_MOVIES = Movie.pluck(:tmdb_id)
 puts "#{EXISTING_MOVIES.length} existing movie ids retrieved.".colorize(:light_blue)
 
 DATE_TODAY = Date.today.strftime("%m_%d_%Y") #11_11_2017
