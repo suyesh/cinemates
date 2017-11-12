@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171111185433) do
+ActiveRecord::Schema.define(version: 20171111203614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "lists", force: :cascade do |t|
+    t.integer "list_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["list_type"], name: "index_lists_on_list_type"
+    t.index ["user_id"], name: "index_lists_on_user_id"
+  end
 
   create_table "movies", force: :cascade do |t|
     t.boolean "adult"
@@ -53,6 +62,13 @@ ActiveRecord::Schema.define(version: 20171111185433) do
     t.index ["tmdb_id"], name: "index_movies_on_tmdb_id"
   end
 
+  create_table "movies_lists", id: false, force: :cascade do |t|
+    t.bigint "movie_id"
+    t.bigint "list_id"
+    t.index ["list_id"], name: "index_movies_lists_on_list_id"
+    t.index ["movie_id"], name: "index_movies_lists_on_movie_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -73,4 +89,5 @@ ActiveRecord::Schema.define(version: 20171111185433) do
     t.index ["zip_code"], name: "index_users_on_zip_code"
   end
 
+  add_foreign_key "lists", "users"
 end

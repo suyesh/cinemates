@@ -2,14 +2,15 @@ require File.dirname(__FILE__) + '/../../config/environment.rb'
 require 'date'
 require 'zlib'
 require 'open-uri'
+require 'colorize'
 
-puts "Retrieving Existing movie ids from the database."
+puts "Retrieving Existing movie ids from the database.".colorize(:blue)
 EXISTING_MOVIES = Movie.tmdb_ids
-puts "#{EXISTING_MOVIES.length} existing movie ids retrieved."
+puts "#{EXISTING_MOVIES.length} existing movie ids retrieved.".colorize(:light_blue)
 
 DATE_TODAY = Date.today.strftime("%m_%d_%Y") #11_11_2017
 
-puts "Downloading and Reading latest Movie list for #{DATE_TODAY}"
+puts "Downloading and Reading latest Movie list for #{DATE_TODAY}".colorize(:blue)
 MOVIES = Zlib::GzipReader.new(
   open("http://files.tmdb.org/p/exports/movie_ids_#{DATE_TODAY}.json.gz")
 ).read
@@ -18,10 +19,11 @@ MOVIES = Zlib::GzipReader.new(
 MOVIES.each_line do |movie|
   movie_id = JSON.parse(movie)['id']
   if EXISTING_MOVIES.include?(movie_id)
-    puts "Movie  with id #{movie_id} already in database."
+    puts "Movie  with id #{movie_id} already in database.".colorize(:yellow)
     next
   end
   sleep 0.2
+  begin
   movie = Tmdb::Movie.detail(movie_id)
   genres = movie.genres.map(&:name)
   production_companies = movie.production_companies.map(&:name)
@@ -52,5 +54,9 @@ MOVIES.each_line do |movie|
                 production_countries: production_countries,
                 spoken_languages: spoken_languages
               )
-  puts "Added #{movie.title} #{movie.id}"
+  rescue => error
+    puts "#{error} could not be added :(".colorize(:red)
+    next
+  end
+  puts "Added #{movie.title} #{movie.id}".colorize(:green)
 end
