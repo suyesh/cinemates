@@ -1,7 +1,8 @@
 class Movie < ApplicationRecord
   has_many :movies_lists
-  
+  has_and_belongs_to_many :genres
+
   def self.tmdb_ids
-    Movie.all.map(&:tmdb_id)
+    Movie.pluck(:tmdb_id)
   end
 end
