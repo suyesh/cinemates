@@ -13,7 +13,8 @@ end
 Movie.all.each do |movie|
   unless movie.genres.length < 1
     movie.genres.each do |genre|
-      Genre.find_by(name: genre) << movie
+      g = Genre.find_by(name: genre)
+      g << movie unless g.movies.include?(genre)
     end
   end
 end
