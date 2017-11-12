@@ -10,11 +10,11 @@ Movie.pluck(:genres).flatten.compact.uniq.each do |genre|
   end
 end
 
-Movie.all.each do |movie|
-  unless movie.genres.length < 1
-    movie.genres.each do |genre|
-      g = Genre.find_by(name: genre)
-      g << movie unless g.movies.include?(genre)
-    end
-  end
-end
+# Movie.all.each do |movie|
+#   unless movie.genres.length < 1
+#     movie.genres.each do |genre|
+#       g = Genre.find_by(name: genre)
+#       g << movie unless g.movies.include?(genre)
+#     end
+#   end
+# end
