@@ -60,3 +60,20 @@ MOVIES.each_line do |movie|
   end
   puts "Added #{movie.title} #{movie.id}".colorize(:green)
 end
+
+EXISTING_MOVIES.each do |movie_id|
+  begin
+  videos = Tmdb::Movie.videos(movie_id)
+  movie = Movie.find_by(id: movie_id)
+  if videos.length > 0 && movie.youtube_key.length < 1
+    movie.youtube_key = videos.map(&:key)
+    movie.save
+    puts "Youtube video for movie #{movie.title} saved".colorize(:green)
+  else
+    puts "Skipping #{movie.title}".colorize(:red)
+  end
+  rescue
+    next
+  end
+  sleep 0.5
+end
