@@ -126,7 +126,7 @@ EXISTING_MOVIES.each do |movie_id|
   begin
   videos = Tmdb::Movie.videos(movie_id)
   movie = Movie.find_by(tmdb_id: movie_id)
-  if videos.length > 0 && movie.youtube_key.lenght < 1
+  if videos.length > 0 
     movie.youtube_key = videos.pluck(:key)
     movie.save
     puts "Youtube video for movie #{movie.title} saved".colorize(:green)
