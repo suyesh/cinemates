@@ -56,3 +56,46 @@ MOVIES.each_line do |movie|
   end
   puts "Added #{movie.title} #{movie.id}".colorize(:green)
 end
+
+
+counter = 1
+
+# UPDATE EXISTING MOVIES
+puts 'Updating movies from latest changes'.colorize(:light_blue)
+while counter <= TOTAL_PAGES_IN_CHANGES
+  ids = Tmdb::Change.movie(page: counter).results.pluck(:id)
+  sleep 0.2
+  ids.each do |id|
+    begin
+      movie = Movie.find_by(tmdb_id: id)
+      changed_movie = Tmdb::Movie.detail(id)
+      movie.adult = changed_movie.adult,
+      movie.backdrop_path = changed_movie.backdrop_path,
+      movie.budget = changed_movie.budget,
+      movie.homepage = changed_movie.homepage,
+      movie.tmdb_id = changed_movie.id,
+      movie.imdb_id = changed_movie.imdb_id,
+      movie.original_language = changed_movie.original_language,
+      movie.original_title = changed_movie.original_title,
+      movie.overview = changed_movie.overview,
+      movie.popularity = changed_movie.popularity,
+      movie.poster_path = changed_movie.poster_path,
+      movie.release_date = changed_movie.release_date,
+      movie.revenue = changed_movie.revenue,
+      movie.runtime = changed_movie.runtime,
+      movie.status = changed_movie.status,
+      movie.tagline = changed_movie.tagline,
+      movie.title = changed_movie.title,
+      movie.video = changed_movie.video,
+      movie.vote_average = changed_movie.vote_average,
+      movie.vote_count = changed_movie.vote_count,
+      movie.save
+    rescue StandardError
+      next
+    end
+    sleep 0.5
+    puts "Updated #{movie.title}".colorize(:green)
+  end
+  puts "Page #{counter} of #{TOTAL_PAGES_IN_CHANGES}".colorize(:yellow)
+  counter += 1
+end
