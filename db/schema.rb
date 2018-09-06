@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_05_225508) do
+ActiveRecord::Schema.define(version: 2018_09_05_233524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,9 +33,11 @@ ActiveRecord::Schema.define(version: 2018_09_05_225508) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
+    t.integer "tmdb_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_genres_on_name"
+    t.index ["tmdb_id"], name: "index_genres_on_tmdb_id"
   end
 
   create_table "genres_movies", id: false, force: :cascade do |t|
@@ -43,6 +45,27 @@ ActiveRecord::Schema.define(version: 2018_09_05_225508) do
     t.bigint "genre_id", null: false
     t.index ["genre_id", "movie_id"], name: "genres_movies_index"
     t.index ["movie_id", "genre_id"], name: "movies_genres_index"
+  end
+
+  create_table "movie_videos", force: :cascade do |t|
+    t.string "iso_639_1"
+    t.string "iso_3166_1"
+    t.string "key"
+    t.string "name"
+    t.string "site"
+    t.integer "size"
+    t.string "video_type"
+    t.bigint "movie_id"
+    t.string "tmdb_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["iso_3166_1"], name: "index_movie_videos_on_iso_3166_1"
+    t.index ["iso_639_1"], name: "index_movie_videos_on_iso_639_1"
+    t.index ["key"], name: "index_movie_videos_on_key"
+    t.index ["movie_id"], name: "index_movie_videos_on_movie_id"
+    t.index ["site"], name: "index_movie_videos_on_site"
+    t.index ["tmdb_id"], name: "index_movie_videos_on_tmdb_id"
+    t.index ["video_type"], name: "index_movie_videos_on_video_type"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -102,10 +125,12 @@ ActiveRecord::Schema.define(version: 2018_09_05_225508) do
     t.string "logo_path"
     t.string "name"
     t.string "origin_country"
+    t.integer "tmdb_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_productions_on_name"
     t.index ["origin_country"], name: "index_productions_on_origin_country"
+    t.index ["tmdb_id"], name: "index_productions_on_tmdb_id"
   end
 
   create_table "spoken_languages", force: :cascade do |t|
@@ -117,4 +142,5 @@ ActiveRecord::Schema.define(version: 2018_09_05_225508) do
     t.index ["name"], name: "index_spoken_languages_on_name"
   end
 
+  add_foreign_key "movie_videos", "movies"
 end

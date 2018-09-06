@@ -9,6 +9,7 @@ class CreateMovieVideos < ActiveRecord::Migration[5.2]
       t.integer :size
       t.string :video_type
       t.references :movie, foreign_key: true
+      t.string :tmdb_id
 
       t.timestamps
     end
@@ -17,5 +18,6 @@ class CreateMovieVideos < ActiveRecord::Migration[5.2]
     add_index :movie_videos, :key
     add_index :movie_videos, :site
     add_index :movie_videos, :video_type
+    add_index :movie_videos, :tmdb_id
   end
 end
