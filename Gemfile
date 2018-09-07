@@ -11,6 +11,10 @@ gem 'mini_magick', '~> 4.8'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'themoviedb-api'
 gem 'figaro'
+gem 'graphql'
+gem 'search_object', '~> 1.2', '>= 1.2.1'
+gem 'search_object_graphql', '~> 0.1'
+gem 'kaminari'
 # gem 'rack-cors'
 
 group :development, :test do

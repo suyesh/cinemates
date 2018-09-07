@@ -12,7 +12,6 @@ def populate_latest_changed_movies
     changed_movies << Tmdb::Change.movie(page: counter).results.pluck(:id)
     counter += 1
   end
-  puts "Page #{counter} of #{TOTAL_PAGES_IN_CHANGES}".colorize(:yellow)
   return changed_movies.flatten
 end
 
@@ -176,25 +175,36 @@ def add_movie_videos(movie, created_movie)
   end
 end
 
+def handle_changed_movies(movie_id)
+  if CHANGED_MOVIES_IDS.include?(movie_id)
+    update_movie(movie_id)
+    sleep 0.5
+  else
+    puts "Skipping existing movie".colorize(:yellow)
+  end
+end
+
+def get_movie_detail(movie_id)
+  Tmdb::Movie.detail(movie_id)
+end
+
+def movie_id(movie)
+  JSON.parse(movie)['id']
+end
+
 #CREATE NEW MOVIES
 puts "Adding Movies to database".colorize(:light_blue)
 MOVIES.each_line do |movie|
-  movie_id = JSON.parse(movie)['id']
-  if EXISTING_MOVIES.include?(movie_id)
-    if CHANGED_MOVIES_IDS.include?(movie_id)
-      update_movie(movie_id)
-    else
-      puts "Skipping existing movie".colorize(:yellow)
-    end
+  if EXISTING_MOVIES.include?(movie_id(movie))
+    handle_changed_movies(movie_id(movie))
     next
   end
   sleep 0.3
   begin
-  movie = Tmdb::Movie.detail(movie_id)
-  created_movie = create_movie(movie)
+  created_movie = create_movie(get_movie_detail(movie_id(movie)))
   add_relations(movie, created_movie)
   rescue => error
-    puts "#{error} could not be added :(".colorize(:red)
+    puts "#{error} => #{movie.id} - #{movie.original_title} could not be added :(".colorize(:red)
     next
   end
   puts "Added #{movie.title} #{movie.id}".colorize(:green)
