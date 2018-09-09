@@ -3,6 +3,9 @@ module MovieConcerns
     extend ActiveSupport::Concern
 
     included do
+
+      default_scope { order('popularity DESC, vote_average DESC') }
+
       scope :upcoming, -> {
         where(
           'release_date >= ? AND release_date <= ?',
