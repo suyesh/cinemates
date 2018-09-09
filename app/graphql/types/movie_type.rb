@@ -28,5 +28,6 @@ module Types
     field :averageVote, types.Float, property: :vote_average
     field :totalVotes, types.Int, property: :vote_count
     field :genres, function: Resolvers::Genres.new
+    field :languages, function: Resolvers::SpokenLanguages.new
   end
 end

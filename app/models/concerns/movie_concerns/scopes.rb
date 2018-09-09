@@ -24,16 +24,16 @@ module MovieConcerns
 
       scope :top_rated, -> {
         where(
-          'vote_average > ? AND vote_count > 1500',
+          'vote_average >= ? AND vote_count >= 100',
           6
-        ).order('vote_average DESC NULLS LAST')
+        ).order('vote_average DESC, popularity')
       }
 
       scope :low_rated, -> {
         where(
-          'vote_average <= ? AND vote_count > 100',
+          'vote_average <= ? AND vote_count >= 100',
           5
-        ).order('vote_average ASC NULLS LAST')
+        ).order('vote_average ASC, popularity')
       }
     end
   end
