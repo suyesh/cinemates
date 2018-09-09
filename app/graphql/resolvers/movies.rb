@@ -19,12 +19,11 @@ module Resolvers
 
     def call(obj, args, ctx)
       set_instance_variables(obj, args, ctx)
-      movies = build_movies.page(args[:page])
       OpenStruct.new(
-        pages: movies.total_pages,
-        currentPage: args[:page],
+        pages: @movies.total_pages,
+        currentPage: @arguments[:page],
         total: get_total,
-        list: movies
+        list: @movies
       )
     end
 
@@ -34,6 +33,7 @@ module Resolvers
       @object = obj
       @arguments = args
       @context = ctx
+      @movies = build_movies
     end
 
     def check_adults(object)
@@ -59,7 +59,7 @@ module Resolvers
     def build_movies
       @movies = get_movie_object
       @movies = check_scopes
+      @movies.page(@arguments[:page])
     end
-
   end
 end
