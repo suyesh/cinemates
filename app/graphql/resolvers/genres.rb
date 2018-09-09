@@ -9,9 +9,9 @@ module Resolvers
       obj ? obj.genres : Genre
     end
 
-    def call(obj, args, ctx)
+    def call(obj, args, _ctx)
       return genre_object(obj).all if args[:name] == 'all'
-      return genre_object(obj).where('name ILIKE ?', "%#{args[:name]}%").all
+      genre_object(obj).where('name ILIKE ?', "%#{args[:name]}%").all
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_05_233524) do
+ActiveRecord::Schema.define(version: 2018_09_08_162052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2018_09_05_233524) do
     t.string "backdrop_path"
     t.string "budget"
     t.string "homepage"
-    t.integer "tmdb_id"
+    t.bigint "tmdb_id"
     t.string "imdb_id"
     t.string "original_language"
     t.string "original_title"
@@ -81,14 +81,14 @@ ActiveRecord::Schema.define(version: 2018_09_05_233524) do
     t.decimal "popularity"
     t.string "poster_path"
     t.date "release_date"
-    t.integer "revenue"
-    t.integer "runtime"
+    t.bigint "revenue"
+    t.bigint "runtime"
     t.string "status"
     t.text "tagline"
     t.string "title"
     t.boolean "video"
     t.decimal "vote_average"
-    t.integer "vote_count"
+    t.bigint "vote_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["adult"], name: "index_movies_on_adult"

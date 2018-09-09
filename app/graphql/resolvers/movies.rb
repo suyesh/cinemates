@@ -10,13 +10,18 @@ module Resolvers
 
     type do
       name 'MoviesResults'
-      field :totalPages, types.Int
+      field :total, types.Int
+      field :pages, types.Int
       field :currentPage, types.Int
-      field :results, types[Types::MovieType]
+      field :list, types[Types::MovieType]
     end
 
     def get_movie_object(obj)
       obj ? obj.movies : Movie
+    end
+
+    def get_total(obj)
+      obj ? obj.movies.count : Movie.count
     end
 
     def check_scopes(movies:, arguments:)
@@ -35,9 +40,10 @@ module Resolvers
     def call(obj, args, _ctx)
       movies = build_movies(arguments: args, object: obj).page(args[:page])
       OpenStruct.new(
-        results: movies,
-        totalPages: movies.total_pages,
-        currentPage: args[:page]
+        pages: movies.total_pages,
+        currentPage: args[:page],
+        total: get_total(obj),
+        list: movies
       )
     end
   end
