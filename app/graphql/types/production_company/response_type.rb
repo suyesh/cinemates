@@ -3,6 +3,7 @@ module Types
     ResponseType = GraphQL::ObjectType.define do
       name 'ProductionCompanies'
       description 'Response object for ProductionCompanies'
+      
       interfaces [Types::Interface::ResponseTypeInterface]
 
       # Basic Attributes for ProductionCompany #####################################
