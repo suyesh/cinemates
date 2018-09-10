@@ -10,13 +10,7 @@ module Resolvers
       argument :lowRated, types.Boolean, default_value: false
       argument :adult, types.Boolean, default_value: false
 
-      type do
-        name 'MoviesResults'
-        field :total, types.Int
-        field :pages, types.Int
-        field :currentPage, types.Int
-        field :list, types[Types::MovieType]
-      end
+      type Types::Movie::ResponseType
 
       def call(obj, args, ctx)
         set_instance_variables(obj, args, ctx)

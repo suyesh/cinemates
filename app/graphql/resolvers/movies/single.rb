@@ -5,7 +5,7 @@ module Resolvers
 
       argument :id, !types.Int
 
-      type Types::MovieType
+      type Types::Movie::ObjectType
 
       def call(obj, args, ctx)
         Movie.find(args[:id])
