@@ -10,7 +10,7 @@ module Types
       field :id, !types.ID
       field :tmdbId, !types.Int, property: :tmdb_id
       field :name, !types.String
-      field :movies, function: Resolvers::Movies.new
+      field :movies, function: Resolvers::Movies::All.new
     end
   end
 end

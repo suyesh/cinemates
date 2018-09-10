@@ -12,7 +12,7 @@ module Types
       field :logo, types.String, property: :logo_path
       field :country, types.String, property: :origin_country
       field :tmdbId, !types.Int, property: :tmdb_id
-      field :movies, function: Resolvers::Movies.new
+      field :movies, function: Resolvers::Movies::All.new
     end
   end
 end

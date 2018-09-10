@@ -9,6 +9,6 @@ module Types
     field :id, !types.ID
     field :name, !types.String
     field :iso6391, !types.String, property: :iso_639_1
-    field :movies, function: Resolvers::Movies.new
+    field :movies, function: Resolvers::Movies::All.new
   end
 end
