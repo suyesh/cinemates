@@ -1,7 +1,7 @@
 module Resolvers
   module SpokenLanguages
     class Single < GraphQL::Function
-      description 'get single spoken language. It Graphs back to the movies.'
+      description 'Query SpokenLanguage by id'
 
       argument :id, !types.Int
 

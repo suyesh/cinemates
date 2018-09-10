@@ -1,7 +1,7 @@
 module Resolvers
   module ProductionCompanies
     class Single < GraphQL::Function
-      description 'Single production company. It Graphs back to the movies.'
+      description 'Query Single production company by Id.'
 
       argument :id, !types.Int
 

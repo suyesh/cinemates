@@ -1,7 +1,7 @@
 module Resolvers
   module Movies
     class Single < GraphQL::Function
-      description "Query Movie. Search by id"
+      description "Query Movie by id"
 
       argument :id, !types.Int
 
