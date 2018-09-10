@@ -7,10 +7,10 @@ module Types
       # Basic Attributes for ProductionCompany #####################################
       ##############################################################################
 
-      field :total, types.Int
-      field :pages, types.Int
-      field :currentPage, types.Int
-      field :list, types[ObjectType]
+      field :total, !types.Int
+      field :pages, !types.Int
+      field :currentPage, !types.Int
+      field :list, !types[ObjectType]
     end
   end
 end
