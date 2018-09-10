@@ -4,8 +4,8 @@ module Types
       name 'Movies'
       description 'Response object for Movies'
 
-      # Basic Attributes for ProductionCompany #####################################
-      ##############################################################################
+      # Basic Response for Movies  #############################################
+      ##########################################################################
 
       field :total, !types.Int
       field :pages, !types.Int

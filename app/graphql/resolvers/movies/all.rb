@@ -1,7 +1,7 @@
 module Resolvers
   module Movies
     class All < GraphQL::Function
-      description "Query Movies. Eventhough this endpoint provides 'nowPlaying', 'upcoming', 'topRated', 'lowRated', suggested use  is to use dedicated endpoint for it."
+      description "Query Movies. Eventhough this endpoint provides 'nowPlaying', 'upcoming', 'topRated', 'lowRated', suggested use is to use dedicated endpoint for it."
 
       argument :page, types.Int, default_value: 1
       argument :nowPlaying, types.Boolean, default_value: false
