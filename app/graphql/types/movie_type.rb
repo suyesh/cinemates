@@ -27,7 +27,8 @@ module Types
     field :video, !types.Boolean
     field :averageVote, types.Float, property: :vote_average
     field :totalVotes, types.Int, property: :vote_count
-    field :genres, function: Resolvers::Genres.new
+    field :genres, function: Resolvers::Genres::All.new
     field :languages, function: Resolvers::SpokenLanguages.new
+    field :productionCompanies, function: Resolvers::ProductionCompanies.new
   end
 end
