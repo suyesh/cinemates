@@ -3,8 +3,8 @@ module Types
     ResponseType = GraphQL::ObjectType.define do
       name 'Movies'
       description 'Response object for Movies'
-      
-      interfaces [Types::Interface::ResponseTypeInterface]
+
+      interfaces [Types::Interface::MetaData]
 
       # Basic Response for Movies  #############################################
       ##########################################################################

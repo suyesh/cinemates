@@ -1,6 +1,6 @@
 module Types
   module Interface
-    ResponseTypeInterface = GraphQL::InterfaceType.define do
+    MetaData = GraphQL::InterfaceType.define do
       name "ResponseTypeInterface"
       description "Generic fields needed in every response"
 

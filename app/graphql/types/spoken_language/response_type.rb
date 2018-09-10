@@ -3,8 +3,8 @@ module Types
     ResponseType = GraphQL::ObjectType.define do
       name 'SpokenLanguages'
       description 'Response object for SpokenLanguages'
-      
-      interfaces [Types::Interface::ResponseTypeInterface]
+
+      interfaces [Types::Interface::MetaData]
 
       # Basic Attributes for ProductionCompany #####################################
       ##############################################################################

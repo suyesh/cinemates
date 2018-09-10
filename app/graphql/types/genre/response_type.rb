@@ -3,8 +3,8 @@ module Types
     ResponseType = GraphQL::ObjectType.define do
       name 'Genres'
       description 'Response object for Genres'
-      
-      interfaces [Types::Interface::ResponseTypeInterface]
+
+      interfaces [Types::Interface::MetaData]
 
       # Basic Attributes for genres ##############################################
       ############################################################################
