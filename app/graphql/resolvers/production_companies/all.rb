@@ -1,6 +1,7 @@
 module Resolvers
   module ProductionCompanies
     class All < GraphQL::Function
+      include Resolvers::Utils::ResponseStruct
       description 'Query production companies. It Graphs back to the movies.'
 
       argument :name, types.String
@@ -12,11 +13,10 @@ module Resolvers
 
       def call(obj, args, ctx)
         set_instance_variable(obj, args, ctx)
-        OpenStruct.new(
-          pages: @production_companies.total_pages,
-          currentPage: @arguments[:page],
-          total: get_total,
-          list: @production_companies
+        respond(
+          result: @production_companies,
+          arguments: @arguments,
+          total: get_total
         )
       end
 

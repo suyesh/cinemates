@@ -1,6 +1,7 @@
 module Resolvers
   module Movies
     class All < GraphQL::Function
+      include Resolvers::Utils::ResponseStruct
       description "Query Movies. Eventhough this endpoint provides 'nowPlaying', 'upcoming', 'topRated', 'lowRated', suggested use is to use dedicated endpoint for it."
 
       argument :page, types.Int, default_value: 1
@@ -14,13 +15,12 @@ module Resolvers
 
       def call(obj, args, ctx)
         set_instance_variables(obj, args, ctx)
-        OpenStruct.new(
-          pages: @movies.total_pages,
-          currentPage: @arguments[:page],
-          total: get_total,
-          list: @movies
+        respond(
+          result: @movies,
+          arguments: @arguments,
+          total: get_total
         )
-      end
+       end
 
       private
 

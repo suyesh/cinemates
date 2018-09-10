@@ -1,6 +1,7 @@
 module Resolvers
   module Genres
     class All < GraphQL::Function
+      include Resolvers::Utils::ResponseStruct
       description 'Query genres. It Graphs back to the movies.'
 
       argument :name, types.String, default_value: 'all'
@@ -8,14 +9,12 @@ module Resolvers
 
       type Types::Genre::ResponseType
 
-
       def call(obj, args, ctx)
         set_instance_variables(obj, args, ctx)
-        OpenStruct.new(
-          pages: @genres.total_pages,
-          currentPage: @arguments[:page],
-          total: get_total,
-          list: @genres
+        respond(
+          result: @genres,
+          arguments: @arguments,
+          total: get_total
         )
       end
 

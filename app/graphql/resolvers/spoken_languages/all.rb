@@ -1,6 +1,7 @@
 module Resolvers
   module SpokenLanguages
     class All < GraphQL::Function
+      include Resolvers::Utils::ResponseStruct
       description 'Query spoken languages. It Graphs back to the movies.'
 
       argument :name, types.String, default_value: 'all'
@@ -10,11 +11,10 @@ module Resolvers
 
       def call(obj, args, ctx)
         set_instance_variables(obj, args, ctx)
-        OpenStruct.new(
-          pages: @languages.total_pages,
-          currentPage: @arguments[:page],
-          total: get_total,
-          list: @languages
+        respond(
+          result: @languages,
+          arguments: @arguments,
+          total: get_total
         )
       end
 
