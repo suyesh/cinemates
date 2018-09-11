@@ -15,7 +15,7 @@ gem 'graphql'
 gem 'search_object', '~> 1.2', '>= 1.2.1'
 gem 'search_object_graphql', '~> 0.1'
 gem 'kaminari'
-# gem 'rack-cors'
+gem 'rack-cors',require: 'rack/cors'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
