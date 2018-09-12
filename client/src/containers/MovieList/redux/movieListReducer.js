@@ -44,6 +44,7 @@ const MovieListReducer = (state = InitialState, action) => {
         nowPlaying: !state.nowPlaying
       };
     case TOGGLE_ADULT:
+      console.log(state.adult);
       return {
         ...InitialState,
         adult: !state.adult
