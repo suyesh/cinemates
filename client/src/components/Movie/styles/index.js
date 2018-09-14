@@ -13,6 +13,12 @@ const MovieListMovie = styled.div`
     min-height: 100%;
     width: 100%;
   }
+  & > :hover {
+    position: relative;
+    transform: scale(1.1);
+    border: 2px solid black;
+    z-index: 1;
+  }
 `;
 
 const MovieToolBarDiv = styled.div`
@@ -39,6 +45,7 @@ const LikeUnlikeButton = styled.div`
   justify-content: center;
   align-items: center;
   border: 0.188em solid #485460;
+  z-index: 2;
 `;
 
 export { MovieListMovie, MovieToolBarDiv, LikeUnlikeButton };
