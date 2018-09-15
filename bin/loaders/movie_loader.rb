@@ -20,6 +20,7 @@ EXISTING_MOVIES = Movie.pluck(:tmdb_id)
 puts "#{EXISTING_MOVIES.length} existing movie ids retrieved.".colorize(:light_blue)
 
 DATE_TODAY = Date.today.strftime('%m_%d_%Y')
+# DATE_TODAY = '09_13_2018'
 
 puts 'Getting changed movies'.colorize(:green)
 CHANGED_MOVIES_IDS = populate_latest_changed_movies
@@ -198,7 +199,7 @@ end
 puts 'Adding Movies to database'.colorize(:light_blue)
 MOVIES.each_line do |movie|
   if EXISTING_MOVIES.include?(movie_id(movie))
-    # handle_changed_movies(movie_id(movie))
+    handle_changed_movies(movie_id(movie))
     puts 'Skipping existing movie'.colorize(:yellow)
     next
   end
