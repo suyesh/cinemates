@@ -1,9 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import MovieList from "../../containers/MovieList";
 
 class App extends Component {
   render() {
-    return <MovieList />;
+    return (
+      <Fragment>
+        <MovieList />
+      </Fragment>
+    );
   }
 }
 

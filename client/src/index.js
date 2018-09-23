@@ -5,6 +5,7 @@ import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { Provider } from "react-redux";
+import "semantic-ui-css/semantic.min.css";
 
 import "./assets/css/main.css";
 import App from "./components/App";

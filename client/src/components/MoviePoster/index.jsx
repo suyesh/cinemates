@@ -1,30 +1,30 @@
 import React, { Component } from "react";
+import Img from "react-image";
 import Rating from "../Rating";
-import MovieLike from "../MovieLike";
 import { MovieListMovie } from "./styles";
+import Loading from "../Loading";
 
-class Movie extends Component {
-  state = {
-    toolbarShow: false
-  };
+class MoviePoster extends Component {
   render() {
     const { movie } = this.props;
     return (
       <MovieListMovie
         image={`http://image.tmdb.org/t/p/w300${movie.posterImage}`}
-        onMouseEnter={() => this.setState({ toolbarShow: true })}
-        onMouseLeave={() => this.setState({ toolbarShow: false })}
-        className="animated slideInUp"
       >
         <Rating averageVote={movie.averageVote} />
-        <MovieLike show={this.state.toolbarShow} movie={movie} />
-        <img
-          alt={movie.originalTitle}
+        <Img
           src={`http://image.tmdb.org/t/p/w300${movie.posterImage}`}
+          loader={
+            <Loading
+              loading={true}
+              inverted={false}
+              content="Loading image..."
+            />
+          }
         />
       </MovieListMovie>
     );
   }
 }
 
-export default Movie;
+export default MoviePoster;

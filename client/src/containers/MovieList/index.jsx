@@ -3,20 +3,28 @@ import { Query } from "react-apollo";
 import { connect } from "react-redux";
 
 import { ALL_MOVIES } from "../../queries";
-import Movie from "../../components/Movie";
+import MoviePoster from "../../components/MoviePoster";
 import { MovieListDiv } from "./styles";
+import Loading from "../../components/Loading";
 
 class MovieList extends Component {
   renderMovies = allMovies =>
-    allMovies.map(movie => <Movie key={movie.id} movie={movie} />);
+    allMovies.map(movie => <MoviePoster key={movie.id} movie={movie} />);
 
   render() {
-    const { page } = this.props;
+    const { dispatch, ...variables } = this.props;
     return (
       <MovieListDiv>
-        <Query query={ALL_MOVIES} variables={{ page }}>
+        <Query query={ALL_MOVIES} variables={{ ...variables }}>
           {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>;
+            if (loading)
+              return (
+                <Loading
+                  loading={true}
+                  inverted={false}
+                  content="Loading movies..."
+                />
+              );
             if (error) return <div>Error</div>;
             return this.renderMovies(data.allMovies.list);
           }}
@@ -27,7 +35,12 @@ class MovieList extends Component {
 }
 
 const mapStateToProps = ({ movieList }) => ({
-  page: movieList.page
+  page: movieList.page,
+  adult: movieList.adult,
+  topRated: movieList.topRated,
+  lowRated: movieList.lowRated,
+  upcoming: movieList.upcoming,
+  nowPlaying: movieList.nowPlaying
 });
 
 export default connect(mapStateToProps)(MovieList);

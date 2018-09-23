@@ -20,7 +20,7 @@ EXISTING_MOVIES = Movie.pluck(:tmdb_id)
 puts "#{EXISTING_MOVIES.length} existing movie ids retrieved.".colorize(:light_blue)
 
 DATE_TODAY = Date.today.strftime('%m_%d_%Y')
-# DATE_TODAY = '09_13_2018'
+# DATE_TODAY = '09_21_2018'
 
 puts 'Getting changed movies'.colorize(:green)
 CHANGED_MOVIES_IDS = populate_latest_changed_movies

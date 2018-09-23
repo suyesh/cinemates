@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const RatingDiv = styled.div`
-  width: 2.5em;
-  height: 2.5em;
+  width: 3em;
+  height: 3em;
   position: absolute;
-  top: 0.625em;
+  top: 1.5em;
   left: 0.625em;
   z-index: 2;
 `;
