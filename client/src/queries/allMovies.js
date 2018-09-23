@@ -8,6 +8,7 @@ const ALL_MOVIES = gql`
     $topRated: Boolean
     $lowRated: Boolean
     $adult: Boolean
+    $popular: Boolean
   ) {
     allMovies(
       page: $page
@@ -16,6 +17,7 @@ const ALL_MOVIES = gql`
       topRated: $topRated
       lowRated: $lowRated
       adult: $adult
+      popular: $popular
     ) {
       total
       currentPage

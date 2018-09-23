@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Query } from "react-apollo";
 import { connect } from "react-redux";
+import { Segment } from "semantic-ui-react";
 
 import { ALL_MOVIES } from "../../queries";
 import MoviePoster from "../../components/MoviePoster";
@@ -14,22 +15,24 @@ class MovieList extends Component {
   render() {
     const { dispatch, ...variables } = this.props;
     return (
-      <MovieListDiv>
-        <Query query={ALL_MOVIES} variables={{ ...variables }}>
-          {({ loading, error, data }) => {
-            if (loading)
-              return (
-                <Loading
-                  loading={true}
-                  inverted={false}
-                  content="Loading movies..."
-                />
-              );
-            if (error) return <div>Error</div>;
-            return this.renderMovies(data.allMovies.list);
-          }}
-        </Query>
-      </MovieListDiv>
+      <Segment inverted className="dark-background">
+        <MovieListDiv>
+          <Query query={ALL_MOVIES} variables={{ ...variables }}>
+            {({ loading, error, data }) => {
+              if (loading)
+                return (
+                  <Loading
+                    loading={true}
+                    inverted={false}
+                    content="Loading movies..."
+                  />
+                );
+              if (error) return <div>Error</div>;
+              return this.renderMovies(data.allMovies.list);
+            }}
+          </Query>
+        </MovieListDiv>
+      </Segment>
     );
   }
 }
@@ -40,7 +43,8 @@ const mapStateToProps = ({ movieList }) => ({
   topRated: movieList.topRated,
   lowRated: movieList.lowRated,
   upcoming: movieList.upcoming,
-  nowPlaying: movieList.nowPlaying
+  nowPlaying: movieList.nowPlaying,
+  popular: movieList.popular
 });
 
 export default connect(mapStateToProps)(MovieList);

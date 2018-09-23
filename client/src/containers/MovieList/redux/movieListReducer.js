@@ -4,7 +4,8 @@ import {
   TOGGLE_LOW_RATED,
   TOGGLE_UPCOMING,
   TOGGLE_NOW_PLAYING,
-  TOGGLE_ADULT
+  TOGGLE_ADULT,
+  TOGGLE_POPULAR
 } from "./movieListActions";
 
 const InitialState = {
@@ -13,6 +14,7 @@ const InitialState = {
   lowRated: false,
   upcoming: false,
   nowPlaying: false,
+  popular: true,
   adult: false
 };
 
@@ -26,28 +28,36 @@ const MovieListReducer = (state = InitialState, action) => {
     case TOGGLE_TOP_RATED:
       return {
         ...InitialState,
+        popular: false,
         topRated: !state.topRated
       };
     case TOGGLE_LOW_RATED:
       return {
         ...InitialState,
+        popular: false,
         lowRated: !state.lowRated
       };
     case TOGGLE_UPCOMING:
       return {
         ...InitialState,
+        popular: false,
         upcoming: !state.upcoming
       };
     case TOGGLE_NOW_PLAYING:
       return {
         ...InitialState,
+        popular: false,
         nowPlaying: !state.nowPlaying
       };
     case TOGGLE_ADULT:
-      console.log(state.adult);
       return {
         ...InitialState,
         adult: !state.adult
+      };
+    case TOGGLE_POPULAR:
+      return {
+        ...InitialState,
+        page: state.page
       };
     default:
       return {

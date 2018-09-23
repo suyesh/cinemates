@@ -10,6 +10,7 @@ module Resolvers
       argument :topRated, types.Boolean, default_value: false
       argument :lowRated, types.Boolean, default_value: false
       argument :adult, types.Boolean, default_value: false
+      argument :popular, types.Boolean, default_value: false
 
       type Types::Movie::ResponseType
 
@@ -48,6 +49,7 @@ module Resolvers
         return @movies.now_playing if @arguments[:nowPlaying]
         return @movies.top_rated if @arguments[:topRated]
         return @movies.low_rated if @arguments[:lowRated]
+        return @movies.popular if @arguments[:popular]
         @movies
       end
 
