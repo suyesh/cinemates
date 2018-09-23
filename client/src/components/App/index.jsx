@@ -1,15 +1,14 @@
-import React, { Component } from "react";
-import { Segment } from "semantic-ui-react";
+import React, { Component, Fragment } from "react";
 import MovieList from "../../containers/MovieList";
 import SecondaryNavBar from "../../containers/SecondaryNavBar";
 
 class App extends Component {
   render() {
     return (
-      <Segment inverted>
+      <Fragment>
         <SecondaryNavBar />
         <MovieList />
-      </Segment>
+      </Fragment>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Menu } from "semantic-ui-react";
+import { Menu, Segment, Container, Input } from "semantic-ui-react";
 
 import {
   toggleTopRated,
@@ -25,26 +25,41 @@ const SecondaryNavBar = ({
   toggleAdult,
   adult
 }) => (
-  <Menu inverted secondary>
-    <Menu.Item name="popular" active={popular} onClick={togglePopular}>
-      Popular
-    </Menu.Item>
-    <Menu.Item name="topRated" active={topRated} onClick={toggleTopRated}>
-      Top Rated
-    </Menu.Item>
-    <Menu.Item name="upcoming" active={upcoming} onClick={toggleUpcoming}>
-      Upcoming
-    </Menu.Item>
-    <Menu.Item name="nowPlaying" active={nowPlaying} onClick={toggleNowPlaying}>
-      Now Playing
-    </Menu.Item>
-    <Menu.Item name="lowRated" active={lowRated} onClick={toggleLowRated}>
-      Low Rated
-    </Menu.Item>
-    <Menu.Item name="lowRated" active={adult} onClick={toggleAdult}>
-      Adult
-    </Menu.Item>
-  </Menu>
+  <Segment inverted fixed="top">
+    <Container fixed="top">
+      <Menu inverted secondary fixed="top" className="menu-top-fixed">
+        <Menu.Item name="popular" active={popular} onClick={togglePopular}>
+          Popular
+        </Menu.Item>
+        <Menu.Item name="topRated" active={topRated} onClick={toggleTopRated}>
+          Top Rated
+        </Menu.Item>
+        <Menu.Item name="upcoming" active={upcoming} onClick={toggleUpcoming}>
+          Upcoming
+        </Menu.Item>
+        <Menu.Item
+          name="nowPlaying"
+          active={nowPlaying}
+          onClick={toggleNowPlaying}
+        >
+          Now Playing
+        </Menu.Item>
+        <Menu.Item name="lowRated" active={lowRated} onClick={toggleLowRated}>
+          Low Rated
+        </Menu.Item>
+        <Menu.Item name="lowRated" active={adult} onClick={toggleAdult}>
+          Adult
+        </Menu.Item>
+        <Menu.Menu position="right">
+          <Menu.Item>
+            <Input icon="search" placeholder="Search..." />
+          </Menu.Item>
+          <Menu.Item name="discover">Lists</Menu.Item>
+          <Menu.Item name="movies">Network</Menu.Item>
+        </Menu.Menu>
+      </Menu>
+    </Container>
+  </Segment>
 );
 
 const mapStateToProps = ({ movieList }) => ({
