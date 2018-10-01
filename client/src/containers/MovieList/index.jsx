@@ -5,8 +5,7 @@ import { Segment } from "semantic-ui-react";
 
 import { ALL_MOVIES } from "../../queries";
 import MoviePoster from "../../components/MoviePoster";
-import { MovieListDiv } from "./styles";
-import Loading from "../../components/Loading";
+import { MovieListMovies } from "./styles";
 
 class MovieList extends Component {
   renderMovies = allMovies =>
@@ -15,23 +14,14 @@ class MovieList extends Component {
   render() {
     const { dispatch, ...variables } = this.props;
     return (
-      <Segment inverted className="dark-background">
-        <MovieListDiv>
-          <Query query={ALL_MOVIES} variables={{ ...variables }}>
-            {({ loading, error, data }) => {
-              if (loading)
-                return (
-                  <Loading
-                    loading={true}
-                    inverted={false}
-                    content="Loading movies..."
-                  />
-                );
-              if (error) return <div>Error</div>;
-              return this.renderMovies(data.allMovies.list);
-            }}
-          </Query>
-        </MovieListDiv>
+      <Segment as={MovieListMovies} attached="bottom">
+        <Query query={ALL_MOVIES} variables={{ ...variables }}>
+          {({ loading, error, data }) => {
+            if (loading) return null;
+            if (error) return <div>Error</div>;
+            return this.renderMovies(data.allMovies.list);
+          }}
+        </Query>
       </Segment>
     );
   }

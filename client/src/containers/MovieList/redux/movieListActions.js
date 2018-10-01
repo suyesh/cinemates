@@ -27,7 +27,7 @@ export const toggleNowPlaying = () => ({
   type: TOGGLE_NOW_PLAYING
 });
 
-export const adult = () => ({
+export const toggleAdult = () => ({
   type: TOGGLE_ADULT
 });
 

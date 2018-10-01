@@ -16,7 +16,7 @@ def populate_latest_changed_movies
 end
 
 puts 'Retrieving Existing movie ids from the database.'.colorize(:blue)
-EXISTING_MOVIES = Movie.pluck(:tmdb_id)
+EXISTING_MOVIES = Movie.unscoped.pluck(:tmdb_id)
 puts "#{EXISTING_MOVIES.length} existing movie ids retrieved.".colorize(:light_blue)
 
 DATE_TODAY = Date.today.strftime('%m_%d_%Y')

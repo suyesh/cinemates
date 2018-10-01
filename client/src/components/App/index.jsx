@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
+import SecondaryNav from "../../containers/SecondaryNav";
 import MovieList from "../../containers/MovieList";
-import SecondaryNavBar from "../../containers/SecondaryNavBar";
 
 class App extends Component {
   render() {
     return (
       <Fragment>
-        <SecondaryNavBar />
+        <SecondaryNav />
         <MovieList />
       </Fragment>
     );

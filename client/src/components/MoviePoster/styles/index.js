@@ -4,9 +4,6 @@ const MovieListMovie = styled.div`
   font-weight: bold;
   text-transform: uppercase;
   position: relative;
-  background-image: url(${props => props.image});
-  background-repeat: no-repeat;
-  background-size: cover;
   cursor: pointer;
   position: relative;
   & > img {
